@@ -2,6 +2,7 @@
 #include "opencv2/opencv.hpp"
 #include "sensor_msgs/msg/image.hpp"
 #include "cv_bridge/cv_bridge.h"
+#include "usr_msgs/msg/boxes.hpp"
 
 
 class BoundingBox : public rclcpp::Node
@@ -15,7 +16,7 @@ private:
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_sub_;
     
     // Publishers
-   
+    rclcpp::Publisher<usr_msgs::msg::Boxes>::SharedPtr boxes_pub_;
     // Timers
 
     // Callbacks

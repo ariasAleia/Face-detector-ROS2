@@ -11,6 +11,7 @@ find_package(rclcpp REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
+find_package(usr_msgs REQUIRED)
 
 include_directories(include) # to add include. We use headers :)
 
@@ -19,6 +20,7 @@ set(DEPENDENCIES # define dependencies. # We add all what we need for this node 
   OpenCV
   sensor_msgs
   cv_bridge
+  usr_msgs
 )
 
 add_executable(bounding_box_node # executable name
