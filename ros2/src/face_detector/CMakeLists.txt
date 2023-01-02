@@ -7,9 +7,33 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(OpenCV REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(cv_bridge REQUIRED)
+find_package(usr_msgs REQUIRED)
+
+include_directories(include) # to add include. We use headers :)
+
+set(DEPENDENCIES # define dependencies. # We add all what we need for this node to work. And here!
+  rclcpp
+  OpenCV
+  sensor_msgs
+  cv_bridge
+  usr_msgs
+)
+
+add_executable(face_detector_node # executable name
+  src/face_detector_node.cpp # location of node file
+) 
+
+ament_target_dependencies(face_detector_node # executable name
+  ${DEPENDENCIES} # specify dependencies
+)
+
+install(TARGETS
+  face_detector_node # executable name
+  DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -23,4 +47,5 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+ament_export_include_directories(include) # to add include. We use headers :)
 ament_package()
