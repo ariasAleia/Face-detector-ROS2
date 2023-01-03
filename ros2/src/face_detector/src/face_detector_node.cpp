@@ -13,16 +13,23 @@ FaceDetector::FaceDetector()
 
 void FaceDetector::save_image_callback_(sensor_msgs::msg::Image msg)
 {
-    RCLCPP_INFO(this->get_logger(), "Received original image in face detector");
     cv_bridge::CvImagePtr cv_ptr;
     cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::RGB8);
     original_image = cv_ptr->image;
-    RCLCPP_INFO(this->get_logger(), "Saved original image in face detector");
 }
 
 void FaceDetector::draw_boxes_callback_(usr_msgs::msg::Boxes msg)
 {
     RCLCPP_INFO(this->get_logger(), "Drawing boxes in face detector");
+    for ( size_t i = 0; i < msg.boxes.size(); i++ )
+    {
+        cv::Point p1(msg.boxes[i].x, msg.boxes[i].y);
+        cv::Point p2(msg.boxes[i].x + msg.boxes[i].width, 
+            msg.boxes[i].y + msg.boxes[i].height);
+  
+        cv::rectangle(original_image,p1,p2,cv::Scalar(0,255,0),3);
+    }
+    cv::imwrite("final_image.png", original_image);
 }
 
 int main(int argc, char * argv[])
