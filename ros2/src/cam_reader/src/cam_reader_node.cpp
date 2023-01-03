@@ -19,8 +19,7 @@ void CamReader::get_image_callback_()
         std::cout << "Error opening camera" << std::endl;
     cv::Mat frame;
     cap >> frame; // get a new frame from camera
-    cv::imwrite("image.png", frame);   
-
+    
     cv_bridge::CvImage img_bridge;
     sensor_msgs::msg::Image cam_msg; 
     
