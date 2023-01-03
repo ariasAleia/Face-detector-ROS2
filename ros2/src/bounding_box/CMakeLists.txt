@@ -35,6 +35,12 @@ install(TARGETS
   bounding_box_node # executable name
   DESTINATION lib/${PROJECT_NAME})
 
+# install the launch directory
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}/
+)
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
