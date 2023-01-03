@@ -31,7 +31,7 @@ I really like when READMEs are totally clear and explain all, so, I will try to 
   ```bash
   bash start.sh
   ```
-* **Step 4:** Open the just created *final_image.png* image
+* **Step 4:** Open the just created *final_image.png* image in the *ros2* folder
 * **Step 5:** Enjoy the magic! If everything works properly you should be seeing now how your webcam is taking photos every 2 secs and draws a green rectangle where a face is detected.
 
 
