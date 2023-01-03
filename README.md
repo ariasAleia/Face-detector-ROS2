@@ -36,6 +36,14 @@ I really like when READMEs are totally clear and explain all, so, I will try to 
 * **Step 4:** Open the just created *final_image.png* image in the *ros2* folder
 * **Step 5:** Enjoy the magic! If everything works properly you should be seeing now how your webcam is taking photos every 2 secs and draws a green rectangle where a face is detected.
 
+Check out this video to know how this works!
+
+
+
+https://user-images.githubusercontent.com/102924128/210385765-5bdcdf3f-363e-4f23-9c32-cc95130cd304.mp4
+
+
+
 
 ## Acknowledgments:
 
