@@ -3,6 +3,8 @@
 #include "sensor_msgs/msg/image.hpp"
 #include "cv_bridge/cv_bridge.h"
 #include "usr_msgs/msg/boxes.hpp"
+#include <unistd.h>
+#include <stdio.h>
 
 
 class BoundingBox : public rclcpp::Node
