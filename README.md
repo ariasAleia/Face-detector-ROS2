@@ -19,7 +19,6 @@ All this magic is done using three different nodes that communicate with each ot
 * **face_detector_node:** Subscribes to the topic */image* and saves it in a class variable called *original_image*. Subscribes to the topic */bounding_boxes* and after receiving the box, it draws green rectangles in the *original_image* and saves the result in *final_image.png*
 
 Check this video to see how it works!
-https://user-images.githubusercontent.com/102924128/210383436-325a5880-c7b2-4359-ba5f-fcd2174957e3.mp4
 
 
 ## How can I use this project?
