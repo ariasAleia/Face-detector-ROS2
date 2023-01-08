@@ -9,8 +9,6 @@ FaceDetector::FaceDetector()
     
     boxes_sub_ = this->create_subscription<usr_msgs::msg::Boxes>("/bounding_boxes", 
         10, std::bind(&FaceDetector::draw_boxes_callback_, this, std::placeholders::_1));
-    
-    final_image_pub_ = this->create_publisher<sensor_msgs::msg::Image>("/final_image", 10);  
 }
 
 void FaceDetector::save_image_callback_(sensor_msgs::msg::Image msg)
@@ -28,21 +26,10 @@ void FaceDetector::draw_boxes_callback_(usr_msgs::msg::Boxes msg)
         cv::Point p1(msg.boxes[i].x, msg.boxes[i].y);
         cv::Point p2(msg.boxes[i].x + msg.boxes[i].width, 
             msg.boxes[i].y + msg.boxes[i].height);
-
+  
         cv::rectangle(original_image,p1,p2,cv::Scalar(0,255,0),3);
     }
     cv::imwrite("final_image.png", original_image);
-
-    // To publish it as a sensor msg Image 
-    cv_bridge::CvImage img_bridge;
-    sensor_msgs::msg::Image final_image; 
-    
-    std_msgs::msg::Header header; // empty header
-
-    img_bridge = cv_bridge::CvImage(header, sensor_msgs::image_encodings::RGB8, original_image);
-    img_bridge.toImageMsg(final_image); // from cv_bridge to sensor_msgs::Image
-
-    final_image_pub_->publish(final_image);
 }
 
 int main(int argc, char * argv[])
