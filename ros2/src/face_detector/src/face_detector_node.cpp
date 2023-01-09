@@ -4,13 +4,18 @@
 FaceDetector::FaceDetector()
 : Node("face_detector")
 {      
+    auto default_qos = rclcpp::QoS(rclcpp::SystemDefaultsQoS());
+
+    // Force to be reliable, some DDS have set defaultQoS to best effort
+    default_qos.reliable();
+
     image_sub_ = this->create_subscription<sensor_msgs::msg::Image>("/image", 
-        10, std::bind(&FaceDetector::save_image_callback_, this, std::placeholders::_1));
+        default_qos, std::bind(&FaceDetector::save_image_callback_, this, std::placeholders::_1));
     
     boxes_sub_ = this->create_subscription<usr_msgs::msg::Boxes>("/bounding_boxes", 
-        10, std::bind(&FaceDetector::draw_boxes_callback_, this, std::placeholders::_1));
+        default_qos, std::bind(&FaceDetector::draw_boxes_callback_, this, std::placeholders::_1));
 
-    final_image_pub_ = this->create_publisher<sensor_msgs::msg::Image>("/final_image", 10);  
+    final_image_pub_ = this->create_publisher<sensor_msgs::msg::Image>("/final_image", default_qos);  
 }
 
 void FaceDetector::save_image_callback_(sensor_msgs::msg::Image msg)

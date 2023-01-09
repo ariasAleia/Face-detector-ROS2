@@ -4,10 +4,15 @@
 BoundingBox::BoundingBox()
 : Node("bounding_box")
 {      
+    auto default_qos = rclcpp::QoS(rclcpp::SystemDefaultsQoS());
+
+    // Force to be reliable, some DDS have set defaultQoS to best effort
+    default_qos.reliable();
+
     image_sub_ = this->create_subscription<sensor_msgs::msg::Image>("/image", 
-        10, std::bind(&BoundingBox::process_image_callback_, this, std::placeholders::_1));
+        default_qos, std::bind(&BoundingBox::process_image_callback_, this, std::placeholders::_1));
     
-    boxes_pub_ = this->create_publisher<usr_msgs::msg::Boxes>("/bounding_boxes", 10);  
+    boxes_pub_ = this->create_publisher<usr_msgs::msg::Boxes>("/bounding_boxes", default_qos);  
 }
 
 void BoundingBox::process_image_callback_(sensor_msgs::msg::Image msg)

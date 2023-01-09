@@ -7,8 +7,13 @@ CamReader::CamReader ()
     get_image_timer_ = this->create_wall_timer(
         std::chrono::milliseconds(2000),
         std::bind(&CamReader::get_image_callback_, this));
+
+    auto default_qos = rclcpp::QoS(rclcpp::SystemDefaultsQoS());
+
+    // Force to be reliable, some DDS have set defaultQoS to best effort
+    default_qos.reliable();
     
-    image_publisher_ = this->create_publisher<sensor_msgs::msg::Image>("/image", 10);
+    image_publisher_ = this->create_publisher<sensor_msgs::msg::Image>("/image", default_qos);
 }
 
 void CamReader::get_image_callback_()
