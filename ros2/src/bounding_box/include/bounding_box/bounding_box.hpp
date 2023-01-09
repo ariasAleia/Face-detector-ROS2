@@ -3,6 +3,7 @@
 #include "sensor_msgs/msg/image.hpp"
 #include "cv_bridge/cv_bridge.h"
 #include "usr_msgs/msg/boxes.hpp"
+#include "vision_msgs/msg/bounding_box2_d.hpp"
 #include <unistd.h>
 #include <stdio.h>
 

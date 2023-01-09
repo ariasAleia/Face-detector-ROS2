@@ -12,6 +12,7 @@ find_package(OpenCV REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(usr_msgs REQUIRED)
+find_package(vision_msgs REQUIRED)
 
 include_directories(include) # to add include. We use headers :)
 
@@ -21,6 +22,7 @@ set(DEPENDENCIES # define dependencies. # We add all what we need for this node 
   sensor_msgs
   cv_bridge
   usr_msgs
+  vision_msgs
 )
 
 add_executable(bounding_box_node # executable name

@@ -7,12 +7,14 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(vision_msgs REQUIRED)
 
 find_package(rosidl_default_generators REQUIRED)
+
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/Box.msg"
   "msg/Boxes.msg"
- )
+  DEPENDENCIES vision_msgs
+)
 ament_export_dependencies(rosidl_default_runtime)
 
 # install the launch directory

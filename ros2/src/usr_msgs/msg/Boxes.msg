@@ -1,1 +1,1 @@
-Box[] boxes
+vision_msgs/BoundingBox2D[] boxes

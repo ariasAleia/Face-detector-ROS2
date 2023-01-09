@@ -25,10 +25,11 @@ void FaceDetector::draw_boxes_callback_(usr_msgs::msg::Boxes msg)
     RCLCPP_INFO(this->get_logger(), "Drawing boxes in face detector");
     for ( size_t i = 0; i < msg.boxes.size(); i++ )
     {
-        cv::Point p1(msg.boxes[i].x, msg.boxes[i].y);
-        cv::Point p2(msg.boxes[i].x + msg.boxes[i].width, 
-            msg.boxes[i].y + msg.boxes[i].height);
-  
+        cv::Point p1(msg.boxes[i].center.position.x - msg.boxes[i].size_x / 2,
+                    msg.boxes[i].center.position.y - msg.boxes[i].size_y / 2);
+        cv::Point p2(msg.boxes[i].center.position.x + msg.boxes[i].size_x / 2,
+                    msg.boxes[i].center.position.y + msg.boxes[i].size_y / 2);
+
         cv::rectangle(original_image,p1,p2,cv::Scalar(0,255,0),3);
     }
     cv::imwrite("final_image.png", original_image);
