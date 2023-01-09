@@ -8,12 +8,13 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(vision_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/Boxes.msg"
-  DEPENDENCIES vision_msgs
+  "msg/FaceDetection.msg"
+  DEPENDENCIES vision_msgs sensor_msgs
 )
 ament_export_dependencies(rosidl_default_runtime)
 

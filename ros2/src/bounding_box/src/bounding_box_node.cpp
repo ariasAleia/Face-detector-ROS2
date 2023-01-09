@@ -12,7 +12,7 @@ BoundingBox::BoundingBox()
     image_sub_ = this->create_subscription<sensor_msgs::msg::Image>("/image", 
         default_qos, std::bind(&BoundingBox::process_image_callback_, this, std::placeholders::_1));
     
-    boxes_pub_ = this->create_publisher<usr_msgs::msg::Boxes>("/bounding_boxes", default_qos);  
+    face_image_pub_ = this->create_publisher<usr_msgs::msg::FaceDetection>("/face_detection", default_qos);  
 }
 
 void BoundingBox::process_image_callback_(sensor_msgs::msg::Image msg)
@@ -32,7 +32,7 @@ void BoundingBox::process_image_callback_(sensor_msgs::msg::Image msg)
     face_cascade.detectMultiScale(frame_gray, faces);
     RCLCPP_INFO_STREAM(this->get_logger(), "Detected faces: " << faces.size());
 
-    usr_msgs::msg::Boxes boxes_msg;
+    usr_msgs::msg::FaceDetection face_detection_msg;
     vision_msgs::msg::BoundingBox2D bounding_box;
 
     for ( size_t i = 0; i < faces.size(); i++ )
@@ -41,9 +41,10 @@ void BoundingBox::process_image_callback_(sensor_msgs::msg::Image msg)
         bounding_box.center.position.y = faces[i].y + faces[i].height / 2;
         bounding_box.size_x = faces[i].width;
         bounding_box.size_y = faces[i].height;
-        boxes_msg.boxes.push_back(bounding_box);
+        face_detection_msg.boxes.push_back(bounding_box);
     }
-    boxes_pub_->publish(boxes_msg);
+    face_detection_msg.image = msg;
+    face_image_pub_->publish(face_detection_msg);
 }
 
 int main(int argc, char * argv[])

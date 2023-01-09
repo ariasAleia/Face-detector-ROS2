@@ -2,7 +2,7 @@
 #include "opencv2/opencv.hpp"
 #include "sensor_msgs/msg/image.hpp"
 #include "cv_bridge/cv_bridge.h"
-#include "usr_msgs/msg/boxes.hpp"
+#include "usr_msgs/msg/face_detection.hpp"
 #include "vision_msgs/msg/bounding_box2_d.hpp"
 #include <unistd.h>
 #include <stdio.h>
@@ -19,7 +19,7 @@ private:
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_sub_;
     
     // Publishers
-    rclcpp::Publisher<usr_msgs::msg::Boxes>::SharedPtr boxes_pub_;
+    rclcpp::Publisher<usr_msgs::msg::FaceDetection>::SharedPtr face_image_pub_;
     // Timers
 
     // Callbacks
