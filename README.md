@@ -18,8 +18,6 @@ All this magic is done using three different nodes that communicate with each ot
 * **bounding_box_node:** Subscribes to the topic */image*, receives the image as message and processes the image to detect faces using the super-hiper-mega Viola Jones algorithm (OpenCV helps us with that. Long life to OpenCV!). Bounding boxes where the faces are detected are then published in the topic */bounding_boxes*
 * **face_detector_node:** Subscribes to the topic */image* and saves it in a class variable called *original_image*. Subscribes to the topic */bounding_boxes* and after receiving the box, it draws green rectangles in the *original_image* and saves the result in *final_image.png*
 
-Check this video to see how it works!
-
 
 ## How can I use this project?
 
@@ -33,7 +31,12 @@ I really like when READMEs are totally clear and explain all, so, I will try to 
   ```bash
   bash start.sh
   ```
-* **Step 4:** Open the just created *final_image.png* image in the *ros2* folder
+* **Step 4:** Open a new terminal and run the following command to open rviz:
+  ```bash
+  rviz2
+  ```
+  Add the images of the topics */image* and */final_image*.
+  
 * **Step 5:** Enjoy the magic! If everything works properly you should be seeing now how your webcam is taking photos every 2 secs and draws a green rectangle where a face is detected.
 
 Check out this video to know how this works!
