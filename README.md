@@ -3,7 +3,7 @@
 Hi there! Welcome to my very first ROS2 Project (in C++): Face Detection :)
 
 
-**Status:** Mission completed (Waiting for feedback)
+**Status:** Mission completed (Waiting for feedback) :)
 
 ## What is this project about and how does it work?
 
